@@ -1,0 +1,2 @@
+..\..\libs\ascsdk.29\bin\adt.bat -package -target ipa-ad-hoc -hideAneLibSymbols yes -storetype pkcs12 -keystore cert\cert_develop.p12 -storepass fd -provisioning-profile cert\rats_develop.mobileprovision dist\the_rats_dev_ad-hoc.ipa application_dev_live.xml -C ..\bin client-air-ios.swf packs.amf client_version_info options-ios.json packs options-override-ios.json -C icons\ios_dev . -extdir ..\lib
+pause

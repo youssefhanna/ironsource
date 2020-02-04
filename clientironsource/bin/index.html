@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>client</title>
+    <meta name="description" content="" />
+
+    <script src="js/swfobject.js"></script>
+    <script>
+      function buyProduct( product, callback ) {
+        try {
+          var r = confirm( "Confirm payment:\n" + product + "\n( sometimes it fails )" );
+          if ( r ) {
+            var randomNumber = Math.random();
+            if ( randomNumber < 0.1 ) {
+              var result = { "result" : "E_ERROR" }
+            }
+            else {
+              var result = { "result" : "E_OK" }
+            }
+            eval( "document['client']." + callback + "( result )" )
+          }
+          else {
+            var result = { "result" : "E_CANCEL" }
+            eval( "document['client']." + callback + "( result )" )
+          }
+        } catch ( e ) {
+          trace( e )
+        }
+
+      }
+
+      var upsellOfferEndTime = null
+      function upsellOfferTtl() {
+        if ( upsellOfferEndTime == null ) {
+          return 0
+        }
+        else {
+          return upsellOfferEndTime - Date.now()
+        }
+      }
+
+      function saveUpsellOfferDate() {
+        if ( upsellOfferEndTime == null ) {
+          upsellOfferEndTime = Date.now() + 300000 / 5
+        }
+      }
+
+      var frequencyOfferEndTime = null
+      function frequencyOfferTtl() {
+        if ( frequencyOfferEndTime == null ) {
+          return 0
+        }
+        else {
+          return frequencyOfferEndTime - Date.now()
+        }
+      }
+
+      function saveFrequencyOfferDate() {
+        if ( frequencyOfferEndTime == null ) {
+          frequencyOfferEndTime = Date.now() + 300000 / 5
+        }
+      }
+
+      function getPaymentProducts( params ) {
+        var version = params["version"]
+        var callback = params["callback"]
+        var products = {
+         "result": "E_OK",
+         "response": {
+           "locale": "en_US",
+           "frequencyOfferTtl": frequencyOfferTtl(),
+           "upsellOfferTtl": upsellOfferTtl(),
+           "product": [
+            {"product": "de.intenium.rats.coins.1065", "base": 1065, "gratis": 360, "type": "coins", "highlight": true, "discount": "none", "price": 22.45, "currency": "USD"},
+            {"product": "de.intenium.rats.coins.492", "base": 492, "gratis": 150, "type": "coins", "highlight": false, "discount": "none", "price": 11.22, "currency": "EUR"},
+            {"product": "de.intenium.rats.coins.309", "base": 309, "gratis": 90, "type": "coins", "highlight": false, "discount": "none", "price": 7.48, "currency": "EUR"},
+            {"product": "de.intenium.rats.coins.156", "base": 156, "gratis": 30, "type": "coins", "highlight": false, "discount": "none", "price": 3.73, "currency": "EUR"},
+            {"product": "de.intenium.rats.coins.170", "base": 170, "gratis": 30, "type": "coins", "highlight": false, "discount": "none", "price": 5.00, "currency": "EUR"},
+            {"product": "de.intenium.rats.coins.100", "base": 100, "gratis": 0, "type": "coins", "highlight": false, "discount": "tutorial", "price": 0.7234523404, "currency": "EUR", "default": true}
+           ]
+          }
+        }
+
+        if ( upsellOfferEndTime == null || upsellOfferTtl() > 0 ) {
+          products.response.product.push( {"product": "de.intenium.rats.bonus.4420", "base":1000, "gratis": 0, "type": "upsell", "highlight": true, "discount": "none", "price": 22.400125, "currency": "EUR"} );
+          products.response.product.push( {"product": "de.intenium.rats.bonus.1816", "base": 10, "gratis": 1, "type": "upsell", "highlight": false, "discount": "none", "price": 11.22, "currency": "EUR"} );
+          products.response.product.push( {"product": "de.intenium.rats.bonus.1816", "base": 2000, "gratis": 2, "type": "upsell", "highlight": false, "discount": "none", "price": 11.22, "currency": "EUR"} );
+        }
+        if ( frequencyOfferEndTime == null || frequencyOfferTtl() > 0 ) {
+          products.response.product.push( {"product": "de.intenium.rats.frequency.300", "base": 300, "gratis": 50, "type": "frequency", "highlight": false, "default": "none", "price": 9.22, "currency": "EUR"} );
+          products.response.product.push( {"product": "de.intenium.rats.frequency.500", "base": 500, "gratis": 100, "type": "frequency", "highlight": false, "default": "true", "price": 11.22, "currency": "EUR"} );
+          products.response.product.push( {"product": "de.intenium.rats.frequency.1000", "base": 1000, "gratis": 200, "type": "frequency", "highlight": true, "discount": "none", "price": 30.22, "currency": "EUR"} );
+        }
+
+        products.response.product.push( {"product": "de.intenium.rats.package.1", "base": 500, "gratis": 100, "type": "package", "highlight": false, "default": "true", "price": 11.22, "currency": "EUR"} );
+        products.response.product.push( {"product": "de.intenium.rats.package.2", "base": 500, "gratis": 100, "type": "package2", "highlight": false, "default": "true", "price": 16.22, "currency": "EUR"} );
+        products.response.product.push( {"product": "de.intenium.rats.package.3", "base": 500, "gratis": 100, "type": "package3", "highlight": false, "default": "true", "price": 21.22, "currency": "EUR"} );
+        products.response.product.push( {"product": "de.intenium.rats.package.4", "base": 500, "gratis": 100, "type": "package4", "highlight": false, "default": "true", "price": 26.22, "currency": "EUR"} );
+
+        var productsString = JSON.stringify( products )
+        eval( "document['client']." + callback + "( productsString )" )
+      }
+
+      function inviteRequest( to, requestType, objectType, callback ) {
+        alert( 'inviteRequest'
+        + '\n to=' + to[0].ingame
+        + '\n requestType=' + requestType
+        + '\n objectType=' + objectType
+        + '\n callback=' + callback )
+        var result = '{\n\
+              "result": "E_ERROR",\n\
+              "message": "Error custom description here"\n\
+            }'
+        eval( "document['client']." + callback + "( result )" )
+      }
+
+      function getProposedFriends( callback ) {
+        var proposedFriends = '{\n\
+              "result": "E_OK",\n\
+              "response": [\n\
+                { "name": "name 1", "avatar": "/avatar/link/1", "id": "id1" },\n\
+                { "name": "name 2", "avatar": "/avatar/link/2", "id": "id2" },\n\
+                { "name": "name 3", "avatar": "/avatar/link/3", "id": "id3" }\n\
+              ]\n\
+          }'
+        eval( "document['client']." + callback + "( proposedFriends )" )
+      }
+
+      var userInfo = '{\n\
+        "game_time":"30004424945",\n\
+        "real_time":"1351848911513",\n\
+        "owner_connected":false,\n\
+        "owner_connect_time":"0",\n\
+        "owner_leave_time":"0",\n\
+        "name":"q",\n\
+        "avatar":"http://auth.intenium-games.com/rc/images/avatars/6.png",\n\
+        "peer_info":{\n\
+          "host":"127.0.0.1",\n\
+          "port":"14000"\n\
+        },\n\
+        "level":"1",\n\
+        "progress_cur":"2",\n\
+        "progress_prev":"0",\n\
+        "game_join_time":"1321345951767",\n\
+        "game_auth":"0",\n\
+        "link":{\n\
+          "appstore":"https://itunes.apple.com/en/app/the-rats-online/id684707651",\n\
+          "android":"https://itunes.apple.com/en/app/the-rats-online/id684707651"\n\
+        }\n\
+      }'
+      var inviteInfo = '{\n\
+        "inviteByEmail": { "action": { "browse": { "url": "http://bash.im/", "target": "_blank" } } },\n\
+        "inviteRequest": { "action": { "callback": "inviteRequest" } },\n\
+        "getProposedFriends": { "action": { "callback": "getProposedFriends" } },\n\
+        "broadcastProviders": [ \n\
+          {\n\
+            "image": { "url": "./static/icon-facebook-invitation.png" },\n\
+            "action": { "callback": "inviteViaFacebook" }\n\
+          }, \n\
+          {\n\
+            "image": { "url": "./static/icon-twitter-invitation.png" },\n\
+            "action": { "callback": "linkToInviteViaTwitter" }\n\
+          }\n\
+        ]\n\
+      }';
+      var paymentsInfo = '{ "coinsProduct": "cnsPrd", "cheeseProduct": "chsPrd", "buy": { "callback": "buyProduct" }, "registerShowPaymentsCallback": { "callback": "registerCallback" } }'
+
+      var paymentsCallback = null;
+      function registerCallback( callback )
+      {
+        paymentsCallback = callback;
+      }
+
+      function showPayments()
+      {
+        eval( "document['client']." + paymentsCallback + "( true )" )
+      }
+
+      function facebookLogEvent( event, amount, params ) {
+        console.log( "facebookLogEvent", event, amount, JSON.stringify( params ) );
+      }
+
+      function facebookLogPurchase( price, currency, params ) {
+        console.log( "facebookLogPurchase", price, currency, JSON.stringify( params ) );
+      }
+
+      var apiInfo = '{' +
+                    '  "newsGetUnread": { "action": { "callback": "getNews" } },' +
+                    '  "newsMarkAsRead": { "action": { "callback": "markAsRead" } },'+
+                    '  "saveUpsellOfferDate": { "action": { "callback": "saveUpsellOfferDate" } },'+
+                    '  "saveFrequencyOfferDate": { "action": { "callback": "saveFrequencyOfferDate" } },'+
+                    '  "sendConnectionEvent": { "action": { "callback": "sendConnectionEvent" } },' +
+                    '  "sendErrorReport": { "action": { "callback": "sendErrorReport" } },' +
+                    '  "FB_AppEvents_logEvent": { "action": { "callback": "facebookLogEvent" } },' +
+                    '  "FB_AppEvents_logPurchase": { "action": { "callback": "facebookLogPurchase" } },' +
+                    '  "paymentGetDescription": { "action": { "callback": "getPaymentProducts" } },' +
+                    '  "openAppRating": { "action": { "browse": { "url": "https://www.facebook.com/games/manage", "target": "_blank" } } }' +
+                    '}'
+
+
+      function getNews( callback )
+      {
+        var result = '{ "result": "E_OK", "news": [ { "newsId": "0", "teaserUrl": "http://www.alamandi.de/skin/default/images/tray/news/sunflowers_tray_197x171.png"}] }'
+        eval( "document['client']['" + callback + "']( result )" )
+      }
+
+      function markAsRead( id )
+      {
+
+      }
+
+      function showPayment( ) {
+        var timer = setInterval(function() {
+            clearInterval(timer);
+            document.getElementById("client").leaveFullscreen();
+        }, 3000);
+      }
+
+      function sendConnectionEvent( ev, addr, eventType, report )
+      {
+        console.log( "sendConnectionEvent", ev, addr, eventType, report, "\n" );
+      }
+
+      function sendErrorReport( report )
+      {
+        console.log( "sendErrorReport\n", unescape( report ), "\n" );
+      }
+      function clientLoadProgress( params )
+      {
+        console.log( "clientLoadProgress\n", params, "\n" );
+      }
+
+      var flashvars = {
+        USER_INFO: userInfo,
+        USER_TOKEN: "",
+        API_INFO: apiInfo,
+        INVITE_INFO: inviteInfo,
+        PAYMENT_INFO: paymentsInfo,
+        LOCALE: "dev,common",
+        sandbox: true
+      };
+      var params = {
+        menu: "false",
+        scale: "noScale",
+        allowFullscreen: "true",
+        allowScriptAccess: "always",
+        bgcolor: "",
+        wmode: "direct" // can cause issues with FP settings & webcam
+      };
+      var attributes = {
+        id:"client"
+      };
+      swfobject.embedSWF(
+        "client.swf",
+        "altContent", "1024px", "810px", "10.0.0",
+        "expressInstall.swf",
+        flashvars, params, attributes);
+    </script>
+    <style>
+      html, body { height:100% }
+      body { margin:0; }
+    </style>
+  </head>
+  <body>
+    <div id="altContent">
+      <h1>client</h1>
+      <p><a href="http://www.adobe.com/go/getflashplayer">Get Adobe Flash player</a></p>
+    </div>
+  </body>
+  <div style="height: 300px; width: 300px" ></div>
+</html>

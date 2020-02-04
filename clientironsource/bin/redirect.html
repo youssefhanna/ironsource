@@ -1,0 +1,30 @@
+<html>
+<head>
+  <script type="text/javascript">
+     <!--
+         function parseQuery(qstr) {
+            var query = {};
+            var a = qstr.substr(1).split('&');
+            for (var i = 0; i < a.length; i++) {
+                var b = a[i].split('=');
+                query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+            }
+            return query;
+        }
+        function Redirect() {
+          var query = parseQuery( window.location.search );
+          if ( query.hasOwnProperty( "rats_proto" ) ) {
+            var dest = query["rats_proto"] + "://" + window.location.search + window.location.hash;
+            //document.body.innerHTML = dest;
+            window.location = dest;
+          }
+          else {
+            document.body.innerHTML = "<p>Invalid URL</p>" + window.location.href;
+          }
+        }
+     //-->
+  </script>
+</head>
+<body onload="Redirect()">
+</body>
+</html>

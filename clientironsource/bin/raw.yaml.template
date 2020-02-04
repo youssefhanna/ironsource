@@ -1,0 +1,9 @@
+disabled : true
+# for client-air-ios version need set resPath with full path, like this : [ resPath : "D:/Projects/game_rats/current/res/" ]
+resPath : "../../res/"
+include :
+#- common/ui/window/sharedfield/|test
+#- common/objs/skills/|silent_walk/style
+
+# We can specify alternative url for resource after ":" at the end of path. ResPath ignored in this case
+# required swf symbols separated with | specified after file name

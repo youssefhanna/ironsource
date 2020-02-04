@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ipa wireless installer</title>
+    <style>
+        a {
+            display: block;
+            width: 100pt;
+            height: 50pt;
+            background-color: blue;
+            color: white;
+            text-align: center;
+            padding-top: 30pt;
+        }
+    </style>
+</head>
+<body>
+    <a id="install_link">Install</a>
+</body>
+<script>
+    document.body.onload = function () {
+        var url = "itms-services://?action=download-manifest&url=" + "@plist-url".replace( /\//g, "%2F" );
+        var installLink = document.getElementById( "install_link" );
+        installLink.href = url;
+    };
+</script>
+</html>

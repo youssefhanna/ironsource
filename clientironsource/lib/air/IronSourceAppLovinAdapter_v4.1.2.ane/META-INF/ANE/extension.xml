@@ -1,0 +1,23 @@
+<extension xmlns="http://ns.adobe.com/air/extension/4.0">
+    <id>com.ironsource.adobeair.applovin</id>
+    <versionNumber>4.1.2</versionNumber>
+    <platforms> 
+        <platform name="Android-ARM">
+            <applicationDeployment>
+                <nativeLibrary>applovinadapter.jar</nativeLibrary>
+                <initializer>com.ironsource.adobeair.AppLovin</initializer>
+            </applicationDeployment> 
+        </platform>
+
+		<platform name="iPhone-ARM"> 
+            <applicationDeployment> 
+                <nativeLibrary>libapplovin.adobeair.a</nativeLibrary>
+                <initializer>SSAExtensionInitializer</initializer>
+            </applicationDeployment>
+        </platform>
+        
+        <platform name="default">
+            <applicationDeployment/>
+        </platform>
+    </platforms> 
+</extension>

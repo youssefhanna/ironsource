@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project version="2">
+  <!-- Output SWF options -->
+  <output>
+    <movie outputType="Application" />
+    <movie input="" />
+    <movie path="bin\client-air-ios.swf" />
+    <movie fps="24" />
+    <movie width="1024" />
+    <movie height="768" />
+    <movie version="28" />
+    <movie minorVersion="0" />
+    <movie platform="AIR Mobile" />
+    <movie background="#000000" />
+    <movie preferredSDK="..\libs\ascsdk.29" />
+  </output>
+  <!-- Other classes to be compiled into your SWF -->
+  <classpaths>
+    <class path="src" />
+    <class path="platform\ios" />
+    <class path="platform\mobile_generic" />
+  </classpaths>
+  <!-- Build options -->
+  <build>
+    <option accessible="False" />
+    <option advancedTelemetry="False" />
+    <option allowSourcePathOverlap="False" />
+    <option benchmark="False" />
+    <option es="False" />
+    <option inline="False" />
+    <option locale="" />
+    <option loadConfig="" />
+    <option optimize="True" />
+    <option omitTraces="True" />
+    <option showActionScriptWarnings="True" />
+    <option showBindingWarnings="True" />
+    <option showInvalidCSS="True" />
+    <option showDeprecationWarnings="True" />
+    <option showUnusedTypeSelectorWarnings="True" />
+    <option strict="True" />
+    <option useNetwork="True" />
+    <option useResourceBundleMetadata="True" />
+    <option warnings="True" />
+    <option verboseStackTraces="False" />
+    <option linkReport="" />
+    <option loadExterns="" />
+    <option staticLinkRSL="True" />
+    <option additional="+configname=airmobile&#xA;-frame 2 intenium.rats.Main intenium.rats.StaticAsset&#xA;-compress=false&#xA;-swf-version=43" />
+    <option compilerConstants="CONFIG::ipad,true" />
+    <option minorVersion="" />
+  </build>
+  <!-- SWC Include Libraries -->
+  <includeLibraries>
+    <!-- example: <element path="..." /> -->
+  </includeLibraries>
+  <!-- SWC Libraries -->
+  <libraryPaths>
+    <!-- example: <element path="..." /> -->
+  </libraryPaths>
+  <!-- External Libraries -->
+  <externalLibraryPaths>
+    <element path="lib\IronSource.ane" />
+    <element path="lib\IronSourceAppLovinAdapter_v4.1.2.ane" />
+  </externalLibraryPaths>
+  <!-- Runtime Shared Libraries -->
+  <rslPaths>
+    <!-- example: <element path="..." /> -->
+  </rslPaths>
+  <!-- Intrinsic Libraries -->
+  <intrinsics>
+    <!-- example: <element path="..." /> -->
+  </intrinsics>
+  <!-- Assets to embed into the output SWF -->
+  <library>
+    <!-- example: <asset path="..." id="..." update="..." glyphs="..." mode="..." place="..." sharepoint="..." /> -->
+  </library>
+  <!-- Class files to compile (other referenced classes will automatically be included) -->
+  <compileTargets>
+    <compile path="src\intenium\rats\Client.as" />
+  </compileTargets>
+  <!-- Paths to exclude from the Project Explorer tree -->
+  <hiddenPaths>
+    <hidden path="lib\air\ANE-Android-Expansion-v1.0.0.ane" />
+    <hidden path="lib\ANE-Android-Expansion-v1.0.0.ane" />
+    <hidden path="build_logs" />
+    <hidden path="build_reports" />
+    <hidden path="obj" />
+  </hiddenPaths>
+  <!-- Executed before build -->
+  <preBuildCommand>$(ProjectDir)\pre-build.bat</preBuildCommand>
+  <!-- Executed after build -->
+  <postBuildCommand alwaysRun="True">$(ProjectDir)\post-build.bat</postBuildCommand>
+  <!-- Other project options -->
+  <options>
+    <option showHiddenPaths="True" />
+    <option testMovie="OpenDocument" />
+    <option testMovieCommand="air-ios\run.bat" />
+  </options>
+  <!-- Plugin storage -->
+  <storage>
+    <entry key="air-descriptor"><![CDATA[air-ios\application_dev.xml]]></entry>
+    <entry key="at_enabled"><![CDATA[0]]></entry>
+    <entry key="at_password"><![CDATA[]]></entry>
+  </storage>
+</project>

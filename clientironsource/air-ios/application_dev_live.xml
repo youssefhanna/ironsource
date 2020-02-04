@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<application xmlns="http://ns.adobe.com/air/application/32.0">
+  <id>de.intenium.rats</id>
+  <versionNumber>3.26.1</versionNumber>
+  <supportedProfiles>mobileDevice</supportedProfiles>
+  <filename>client-air-ios</filename>
+  <architecture>64</architecture>
+  <name>
+    <text xml:lang="en">The Rats</text>
+  </name>
+  <android>
+    <manifestAdditions><![CDATA[<manifest android:installLocation="auto">
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch" />
+</manifest>]]></manifestAdditions>
+  </android>
+  <iPhone>
+    <InfoAdditions><![CDATA[<key>UIStatusBarStyle</key>
+<string>UIStatusBarStyleBlackOpaque</string>
+<key>MinimumOSVersion</key>
+<string>8.0</string>
+<key>UIRequiresPersistentWiFi</key>
+<string>NO</string>
+<key>UIPrerenderedIcon</key>
+<true />
+<key>FacebookAutoLogAppEventsEnabled</key>
+<false/>
+<key>UIDeviceFamily</key>
+<array>
+	<!-- iPhone support -->
+	<string>1</string>
+	<!-- iPad support -->
+	<string>2</string>
+</array>
+<key>ITSAppUsesNonExemptEncryption</key>
+<false/>
+<key>FacebookAppID</key>
+<string>490114917719826</string>
+<key>FacebookDisplayName</key>
+<string>TheRats</string>
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+    <key>NSExceptionDomains</key>
+    <dict>
+        <key>facebook.com</key>
+        <dict>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+            <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+            <false/>
+        </dict>
+        <key>fbcdn.net</key>
+        <dict>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+            <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+            <false/>
+        </dict>
+        <key>akamaihd.net</key>
+        <dict>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+            <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+            <false/>
+        </dict>
+        <key>vk.com</key>
+        <dict>
+            <key>NSExceptionRequiresForwardSecrecy</key>
+            <false/>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+            <key>NSExceptionAllowsInsecureHTTPLoads</key>
+            <true/>
+        </dict>
+        <key>intenium-games.com</key>
+        <dict>
+            <key>NSExceptionRequiresForwardSecrecy</key>
+            <false/>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+            <key>NSExceptionAllowsInsecureHTTPLoads</key>
+            <true/>
+        </dict>
+    </dict>
+</dict>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>fbapi</string>
+</array>
+<key>CFBundleURLTypes</key>
+<array>
+	<dict>
+		<key>CFBundleURLSchemes</key>
+		<array>
+		</array>
+		<key>CFBundleURLName</key>
+		<string>de.intenium.rats</string>
+	</dict>
+</array>]]></InfoAdditions>
+    <requestedDisplayResolution excludeDevices="iPad3 iPad4">high</requestedDisplayResolution>
+    <Entitlements><![CDATA[<key>aps-environment</key>
+<string>development</string>
+<key>com.apple.developer.associated-domains</key>
+<array>
+	<string>applinks:0aab95c39e92d0a6313c4842e4534f9f.ulink.adjust.com</string>
+</array>]]></Entitlements>
+  </iPhone>
+  <initialWindow>
+    <title>client-air-ios</title>
+    <content>client-air-ios.swf</content>
+    <visible>true</visible>
+    <fullScreen>true</fullScreen>
+    <!--<autoOrients>false</autoOrients>-->
+    <!--<aspectRatio>landscape</aspectRatio>-->
+    <renderMode>direct</renderMode>
+    <systemChrome>standard</systemChrome>
+    <aspectRatio>landscape</aspectRatio>
+    <autoOrients>true</autoOrients>
+    <transparent>false</transparent>
+  </initialWindow>
+  <icon>
+    <image29x29>icons/icon@29.png</image29x29>
+    <image40x40>icons/Icon-Small-40.png</image40x40>
+    <image50x50>icons/Icon-Small-50.png</image50x50>
+    <image57x57>icons/Icon.png</image57x57>
+    <image58x58>icons/Icon-29@2x.png</image58x58>
+    <image60x60>icons/Icon-60.png</image60x60>
+    <image72x72>icons/Icon-72.png</image72x72>
+    <image76x76>icons/Icon-76.png</image76x76>
+    <image512x512>icons/iTunesArtwork.png</image512x512>
+    <image1024x1024>icons/iTunesArtwork@2x.png</image1024x1024>
+  </icon>
+  <!--
+	AIR options:
+	http://livedocs.adobe.com/flex/3/html/File_formats_1.html#1043413
+	
+	AIR mobile options:
+	http://help.adobe.com/en_US/air/build/WSfffb011ac560372f-5d0f4f25128cc9cd0cb-7ffe.html
+	
+	Android manifest documentation:
+	http://developer.android.com/guide/topics/manifest/manifest-intro.html
+	-->
+  <supportedLanguages>en</supportedLanguages>
+  <description>
+    <text xml:lang="en">
+    </text>
+  </description>
+  <extensions>
+	<extensionID>com.ironsource.adobeair</extensionID>
+	<extensionID>com.ironsource.adobeair.applovin</extensionID>
+  </extensions>
+
+</application>
